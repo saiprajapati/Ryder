@@ -1,0 +1,138 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarPooling - Passenger Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212; /* Dark theme */
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1, h3 {
+            color: #ffffff;
+            margin: 20px 0;
+            text-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        h1:hover, h3:hover {
+            transform: scale(1.05);
+            color: #1e88e5;
+        }
+        hr {
+            width: 80%;
+            border: 1px solid #333;
+            margin: 20px auto;
+        }
+        .btn {
+            color: #1e88e5;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 10px 15px;
+            border: 1px solid #1e88e5;
+            border-radius: 5px;
+            background-color: transparent;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #1e88e5;
+            color: white;
+        }
+        .btn_logout {
+            color: #f44336;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 10px 15px;
+            border: 1px solid #f44336;
+            border-radius: 5px;
+            background-color: transparent;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn_logout:hover {
+            background-color: #f44336;
+            color: white;
+        }
+        ol {
+            text-align: left;
+            margin: 0 auto;
+            padding: 0 20px;
+            max-width: 600px;
+        }
+        ol li {
+            margin: 10px 0;
+        }
+        ol li a {
+            color: #1e88e5;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        ol li a:hover {
+            color: #0059c1;
+        }
+        span {
+            font-weight: bold;
+            color: #1e88e5;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+
+    <!-- Web3.js-->
+  <script src="node_modules/web3.js-browser/build/web3.js"></script>
+  <script src="node_modules/web3/dist/web3.min.js"></script>
+  <script src="web3connection.js"></script> 
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    var hashcode="";
+    $(document).ready(function(){
+
+          var hashcode=Cookies.get('hashcodecp');
+          var username=Cookies.get('usernamecp');  
+
+           $("#uname").html(username); 
+           $("#hcode").html(hashcode);
+
+        //balance View
+        web3.eth.getBalance(hashcode).then(function(rvalue){
+                rvalue=web3.utils.fromWei(rvalue,"Ether");
+               $("#balance").html(rvalue + "ETH"); 
+
+            })
+
+
+           myContract.methods.getPassengerRides(hashcode).call().then(
+						function(returnarray){
+							$("#cntview").text(returnarray[1]);
+
+    						}
+							);
+
+           
+    });
+</script>
+</head>
+
+<body>
+<h1>CarPooling - Passenger Panel</h1>
+<hr />
+<div>Welcome <span id="uname"></span></div>
+<div>Account ID : <span id="hcode"></span></div>
+<div>Account Balance : <span id="balance"></span></div>
+
+<hr />
+<div align="right">
+    <a class="btn" href="userdashboardpanelchoice.html">Switch to Account</a>
+    <a class="btn_logout" href="index.html">Logout</a>
+</div>
+<h3>Menu Option</h3>
+<ol>
+    <li><a href='ViewPassengerBookedRides.html'>Booked Ride</a></li>
+    <li><a href='viewPassengerRideDetails.html'>View All Rides</a> (<span id=cntview>0</span>)</li>
+    <li><a href='searchViewByLocation.html'>Search By Location</a></li>
+</ol>
+</body>
+</html>
