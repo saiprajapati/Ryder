@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rydr - Carpooling</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+            background: #f3f4f6;
+            scroll-behavior: smooth;
+        }
+
+        /* Background Slideshow */
+        .slideshow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: fadeEffect 18s infinite;
+        }
+
+        .slide:nth-child(1) {
+            background-image: url('background1a.avif');
+            animation-delay: 0s;
+        }
+
+        .slide:nth-child(2) {
+            background-image: url('background2.jpg');
+            animation-delay: 6s;
+        }
+
+        .slide:nth-child(3) {
+            background-image: url('background3.webp');
+            animation-delay: 12s;
+        }
+
+        @keyframes fadeEffect {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            40% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1e88e5;
+            text-transform: capitalize;
+            letter-spacing: 2px;
+        }
+
+        .login-btn {
+            background: #1e88e5;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+            margin-right: 55px;
+        }
+
+        .login-btn:hover {
+            transform: scale(1.05);
+            background: #0059c1;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            animation: fadeIn 2.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Benefits Section */
+        .benefits-container {
+            text-align: center;
+            background: #ffffff;
+            color: #212121;
+            padding: 60px 20px;
+        }
+
+        .benefits-container h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 50px auto;
+            max-width: 1000px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .benefit.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .benefit img {
+            width: 40%;
+            height: auto;
+            border-radius: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit img:hover {
+            transform: scale(1.05);
+        }
+
+        .benefit .text {
+            width: 50%;
+            padding: 30px;
+            text-align: left;
+            font-size: 1.2rem;
+        }
+
+        .benefit:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        footer {
+            background: #333;
+            color:#1e88e5 ;
+            padding: 20px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .benefit {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .benefit img,
+            .benefit .text {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+    </div>
+
+    <header>
+        <div class="logo">ryder</div>
+        <a href="index.html" class="login-btn">Login</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Seamless Carpooling with Rydr</h1>
+            <p>Share rides. Save money. Save the planet.</p>
+        </section>
+
+        <section class="benefits-container">
+            <h2>Carpooling Pays Off!</h2>
+
+            <div class="benefit">
+                <div class="text">
+                    <h3>Save Money</h3>
+                    <p>Sustainable mobility that pays off for everyone: With the carpooling service, drivers and passengers save money. Travel costs are simply shared.</p>
+                </div>
+                <img src="savemoney.jpg" alt="Save Money">
+            </div>
+
+            <div class="benefit">
+                <div class="text">
+                    <h3>Promoting Sustainability</h3>
+                    <p>Carpooling saves CO2 emissions and ensures less traffic on the roads – and thus a better climate.</p>
+                </div>
+                <img src="sustainability.jpg" alt="Promoting Sustainability">
+            </div>
+
+            <div class="benefit">
+                <div class="text">
+                    <h3>Relieve Infrastructure</h3>
+                    <p>Full parking lots and traffic jams at rush hour not only take away time, they also cause stress. Carpools provide more room on the road – and on your calendar.</p>
+                </div>
+                <img src="infrastructure.jpeg" alt="Relieve Infrastructure">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Rydr. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Add header dynamic background effect on scroll
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for appearing/disappearing effects
+        const benefits = document.querySelectorAll('.benefit');
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            },
+            { threshold: 0.2 }
+        );
+
+        benefits.forEach(benefit => observer.observe(benefit));
+    </script>
+</body>
+</html>
