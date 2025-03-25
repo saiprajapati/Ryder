@@ -3,172 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ryder - Register</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.1.2/web3.min.js"></script>
-
+    <title>CarPooling - Create Account</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #222;
-            color: white;
-            text-align: center;
+            background-color: #121212; /* Dark theme */
+            color: #e0e0e0; /* Light text */
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-
-        .register-container {
-            max-width: 450px;
-            margin: 80px auto;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
-        }
-
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: wheat;
+            color: #ffffff;
+            text-align: center;
+            margin-top: 30px;
+            text-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
         }
-
-        .panel {
-            margin: 20px 0;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            box-shadow: 0px 2px 5px rgba(255, 255, 255, 0.1);
+        h1:hover {
+            transform: scale(1.05);
         }
-
-        h2 {
-            margin-bottom: 10px;
-            font-size: 1.5rem;
-            color: wheat;
+        hr {
+            width: 90%;
+            border: 0.5px solid #333;
+            margin-bottom: 20px;
         }
-
-        label {
-            display: block;
-            font-size: 1rem;
-            margin-bottom: 5px;
-            text-align: left;
+        .btn {
+            color: #1e88e5;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 10px 15px;
+            border: 1px solid #1e88e5;
+            border-radius: 5px;
+            background-color: transparent;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #1e88e5;
             color: white;
         }
-
-        input {
+        form {
+            width: 400px;
+            background-color: #1d1d1d;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        form div {
+            margin: 10px 0;
+        }
+        .title {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #c0c0c0;
+        }
+        input[type="text"] {
             width: 100%;
             padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #fff;
+            margin: 5px 0;
+            border: 1px solid #555;
             border-radius: 5px;
-            background: rgba(255, 255, 255, 0.2);
+            background-color: #2a2a2a;
             color: white;
-            font-size: 1rem;
         }
-
-        input:focus {
-            outline: none;
-            border-color: wheat;
+        input[type="text"]::placeholder {
+            color: #888;
         }
-
-        .register-btn {
-            background: wheat;
-            color: black;
-            padding: 12px;
+        input[type="button"] {
+            background-color: #1e88e5;
+            color: white;
             border: none;
-            width: 100%;
-            border-radius: 5px;
+            padding: 10px 15px;
             cursor: pointer;
-            font-weight: bold;
-            font-size: 1rem;
-            transition: 0.3s;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(30, 136, 229, 0.5);
         }
-
-        .register-btn:hover {
-            background: white;
-            color: black;
+        input[type="button"]:hover {
+            background-color: #0059c1;
+            box-shadow: 0 8px 20px rgba(30, 136, 229, 0.8);
         }
-
-        .message {
-            text-align: center;
-            margin-top: 10px;
-            font-weight: bold;
-            color: wheat;
-        }
-
-        .back-home {
-            display: block;
-            margin: 20px auto;
-            color: wheat;
-            text-decoration: none;
-            font-size: 1.2rem;
-            transition: 0.3s;
-        }
-
-        .back-home:hover {
-            text-decoration: underline;
-            color: white;
+        input[type="text"]:focus {
+            outline: none;
+            border: 1px solid #1e88e5;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+  
+    <!-- Web3.js-->
+  <script src="node_modules/web3.js-browser/build/web3.js"></script>
+  <script src="node_modules/web3/dist/web3.min.js"></script>
+  <script src="web3connection.js"></script> 
+  <link rel="stylesheet" href="style.css" />
+    <script>
+        $(document).ready(function(){
+            // Animate the header title on hover
+            $('h1').hover(function() {
+                $(this).css('color', '#1e88e5');
+            }, function() {
+                $(this).css('color', '#ffffff');
+            });
+
+            // Highlight input fields on focus
+            $("input[type='text']").focus(function() {
+                $(this).css("border", "1px solid #1e88e5");
+            }).blur(function() {
+                $(this).css("border", "1px solid #555");
+            });
+
+
+        $(document).ready(function(){
+           $("#btn_action").click(function(){
+        
+                //Cookies.set()
+                //alert("working");
+                var hashcode=$("#hashaddress").val();
+                var uname=$("#username").val();
+                var uemail=$("#useremail").val();
+                var ucontact=$("#usercontact").val();
+			      
+                if (!uname || !uemail || !ucontact || !hashcode) {
+                    alert("Please fill in all fields.");
+                    return;
+                }
+
+      
+				myContract.methods.RegisterUserAccount(hashcode,uname,ucontact,uemail).send({from : hashcode, gas : '3000000'});
+
+                Cookies.set('hashcodecp',hashcode,{expires : 14});
+                Cookies.set('usernamecp',uname,{expires : 14});
+                 window.location.replace('userdashboardpanelchoice.html');
+             });
+        
+        });
+    }); 
+        </script>
+
+
 </head>
 <body>
+<h1>CarPooling</h1>
+<hr />
+<div align="right">
+    <a class="btn" href="index.html">Go Back</a>
+  </div>
+<form>
+<div>
+    <span class="title">User Name</span>
+    <input type="text" id="username" placeholder="Username" />
+</div>
 
-    <div class="register-container">
-        <h1>Ryder - Register</h1>
+<div>
+    <span class="title">User Email</span>
+    <input type="text" id="useremail" placeholder="User Email" />
+</div>
 
-        <div class="panel">
-            <label for="username">User Name</label>
-            <input type="text" id="username" placeholder="Enter your name">
+<div>
+    <span class="title">User Contact No</span>
+    <input type="text" id="usercontact" placeholder="Contact No" />
+</div>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email">
-
-            <label for="contact">Contact No</label>
-            <input type="text" id="contact" placeholder="Enter your contact">
-
-            <label for="wallet-address">Ethereum Wallet Address</label>
-            <input type="text" id="wallet-address" placeholder="Click button to connect" readonly>
-
-            <button class="register-btn" onclick="registerUser()">Create Account</button>
-
-            <p class="message" id="message"></p>
-        </div>
-    </div>
-
-    <a href="index.html" class="back-home">← Back to Home</a>
-
-    <script>
-        async function connectWallet() {
-            if (window.ethereum) {
-                try {
-                    window.web3 = new Web3(window.ethereum);
-                    await window.ethereum.request({ method: "eth_requestAccounts" });
-
-                    const accounts = await web3.eth.getAccounts();
-                    document.getElementById("wallet-address").value = accounts[0];
-                } catch (error) {
-                    alert("Error connecting to MetaMask. Please try again.");
-                }
-            } else {
-                alert("Please install MetaMask to continue.");
-            }
-        }
-
-        function registerUser() {
-            const username = document.getElementById("username").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const contact = document.getElementById("contact").value.trim();
-            const walletAddress = document.getElementById("wallet-address").value.trim();
-
-            if (!username || !email || !contact || !walletAddress) {
-                document.getElementById("message").innerText = "All fields are required!";
-                return;
-            }
-
-            document.getElementById("message").innerText = "Account Created Successfully!";
-        }
-
-        window.addEventListener("load", connectWallet);
-    </script>
-
+<div>
+    <span class="title">HashCode Address</span>
+    <input type="text" style="width: 400px;" id="hashaddress" placeholder="HashCode Address" />
+</div>
+<div>
+    <span class="title"></span>
+    <input type="button"  id="btn_action" value="Create Account" />
+</div>
+</form>
 </body>
 </html>
